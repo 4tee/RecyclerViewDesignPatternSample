@@ -8,27 +8,27 @@ import android.view.ViewGroup
 import henry.code.recyclerviewdesignpatternsample.R
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class AnimalAdapter(private val animals: ArrayList<Animal>, private val context: Context) : RecyclerView.Adapter<AnimalAdapter.ViewHolder>() {
+class AnimalAdapter(private val animals: ArrayList<Animal>, private val context: Context) : RecyclerView.Adapter<AnimalAdapter.AnimalViewHolder>() {
 
-    class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class AnimalViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
         val tvAnimalName = view.text_name
         val tvAnimalLegs = view.text_legs
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
         // Inflate the layout
-        return ViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
+        return AnimalViewHolder(LayoutInflater.from(context).inflate(R.layout.list_item, parent, false))
     }
 
     override fun getItemCount(): Int {
         return animals.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.tvAnimalName.text = animals[position].name
-        holder?.tvAnimalLegs.text = animals[position].leg.toString()
+    override fun onBindViewHolder(holderAnimal: AnimalViewHolder, position: Int) {
+        holderAnimal?.tvAnimalName.text = animals[position].name
+        holderAnimal?.tvAnimalLegs.text = animals[position].leg.toString()
     }
 
 }
