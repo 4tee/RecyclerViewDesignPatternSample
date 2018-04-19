@@ -1,10 +1,14 @@
 package henry.code.recyclerviewdesignpatternsample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import henry.code.recyclerviewdesignpatternsample.model.Car
+import henry.code.recyclerviewdesignpatternsample.viewmodel.AnimalVisitable
+import henry.code.recyclerviewdesignpatternsample.viewmodel.CarVisitable
+import henry.code.recyclerviewdesignpatternsample.viewmodel.Visitable
 import henry.code.rvadapterpatternsample.Animal
-import henry.code.rvadapterpatternsample.AnimalAdapter
+import henry.code.rvadapterpatternsample.RecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,21 +18,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerList.layoutManager = LinearLayoutManager(this)
-        recyclerList.adapter = AnimalAdapter(getAnimals(), this)
+        recyclerList.adapter = RecyclerViewAdapter(getObjects(), TypeFactoryImpl())
     }
 
-    private fun getAnimals() : ArrayList<Animal> {
-        var animals = ArrayList<Animal>()
-        animals.add(Animal("Dog", 4))
-        animals.add(Animal("Cat", 4))
-        animals.add(Animal("Owl", 2))
-        animals.add(Animal("Bear",4))
-        animals.add(Animal("Lion", 4))
-        animals.add(Animal("Tiger", 4))
-        animals.add(Animal("Fox", 4))
-        animals.add(Animal("Monkey",2))
-        animals.add(Animal("Penguin",2))
-        return animals
+    private fun getObjects(): ArrayList<Visitable> {
+        var objects = ArrayList<Visitable>()
+        objects.add(AnimalVisitable(Animal("Cat", 4)))
+        objects.add(AnimalVisitable(Animal("Owl", 2)))
+        objects.add(AnimalVisitable(Animal("Bear", 4)))
+        objects.add(AnimalVisitable(Animal("Lion", 4)))
+        objects.add(AnimalVisitable(Animal("Tiger", 4)))
+        objects.add(AnimalVisitable(Animal("Monkey", 2)))
+        objects.add(CarVisitable(Car("BMW", R.drawable.ic_airport_shuttle)))
+        return objects
     }
 
 }
